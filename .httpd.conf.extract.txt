@@ -1,0 +1,51 @@
+# Apache httpd.conf extract providing URL routing and other directives
+
+#   Example usage in httpd.conf:
+#   
+#   # Abstract submission system
+#   Include /path/to/abstract-submissions/.httpd.conf.extract.txt
+#   Use MacroAbstractSubmissions "/abstracts" "/path/to/abstract-submissions/:/path/to/php/libraries/:/path/to/ckeditor/" "/path/to/ckeditor/"
+
+
+<Macro MacroAbstractSubmissions $applicationBaseUrl $includePath $ckEditorPath>
+	
+	<Location $applicationBaseUrl>
+		php_value include_path "$includePath"
+	</Location>
+	
+	Use MacroFrontControllerApplication "$applicationBaseUrl/" "Abstracts"
+	
+	Use MacroSinenomineEmbeddedWholeDb "$applicationBaseUrl" "/data" "editing"
+	
+	RewriteRule ^$applicationBaseUrl/submit.html$ $applicationBaseUrl/index.html?action=submit [L]
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/$ $applicationBaseUrl/index.html?action=instance&item=$1 [L]
+	RedirectMatch Permanent ^$applicationBaseUrl/([a-z0-9-]+)$ $applicationBaseUrl/$1/
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/([0-9]+)/$                           $applicationBaseUrl/index.html?action=submission&item=$2&moniker=$1&do=view [L]
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/([0-9]+)/(edit|addauthor|delete|confirm).html$      $applicationBaseUrl/index.html?action=submission&item=$2&moniker=$1&do=$3 [L]
+	RedirectMatch Permanent ^$applicationBaseUrl/([a-z0-9-]+)/([0-9]+)$ $applicationBaseUrl/$1/$2/
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/([0-9]+)/([0-9]+)/$      $applicationBaseUrl/index.html?action=submission&item=$2&moniker=$1&do=viewauthor&author=$3 [L]
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/([0-9]+)/([0-9]+)/(edit|delete).html$      $applicationBaseUrl/index.html?action=submission&item=$2&moniker=$1&do=$4author&author=$3 [L]
+	RedirectMatch Permanent ^$applicationBaseUrl/([a-z0-9-]+)/([0-9]+)/([0-9]+)$ $applicationBaseUrl/$1/$2/$3/
+	RewriteRule ^$applicationBaseUrl/download.html$ $applicationBaseUrl/index.html?action=download [L]
+	# NB \1 is a backreference in the test
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/\1\.csv$ $applicationBaseUrl/index.html?action=downloadcsv&item=$1 [L,QSA]
+	RewriteRule ^$applicationBaseUrl/([a-z0-9-]+)/dataprotection.html$ $applicationBaseUrl/index.html?action=dataprotection&item=$1 [L]
+	
+	<LocationMatch ^$applicationBaseUrl/([a-z0-9-]+)/\1.csv$>
+		php_value auto_prepend_file none
+		php_value auto_append_file none
+	</LocationMatch>
+	
+	Alias $applicationBaseUrl/_ckeditor/ "$ckEditorPath"
+	<Location ^$applicationBaseUrl/_ckeditor/>
+		AddType application/x-httpd-php .html .php
+		php_admin_value auto_prepend_file none
+		php_admin_value auto_append_file none
+		Allow from all
+	</Location>
+	
+	<Location $applicationBaseUrl/>
+		php_value memory_limit 100M
+	</Location>
+	
+</Macro>

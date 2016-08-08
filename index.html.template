@@ -1,0 +1,16 @@
+<?php
+
+# Define the settings
+$settings = array (
+	'hostname'			=> 'localhost',
+	'username'			=> 'the_username',
+	'password'			=> 'the_password',
+	'organisationName'	=> 'organisation_name',
+	'feedbackRecipient'	=> 'webmaster@example.com',
+);
+
+# Run the application with the specified settings
+require_once ('abstractSubmissions.php');
+new abstractSubmissions ($settings);
+
+?>
