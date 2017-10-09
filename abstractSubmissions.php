@@ -1375,12 +1375,17 @@ class abstractSubmissions extends frontControllerApplication
 			$list[$moniker] = "<a href=\"{$this->baseUrl}/{$moniker}/{$moniker}.csv\"><strong>{$moniker}.csv</strong></a> <strong>(" . htmlspecialchars ($instance['title']) . ")</strong> - {$submissions[$moniker]['complete']} complete submissions" . ($submissions[$moniker]['incomplete'] ? "; excludes {$submissions[$moniker]['incomplete']} incomplete " . ($submissions[$moniker]['incomplete'] == 1 ? 'submission' : 'submissions') . " from: <br />" . application::htmlUl ($submissions[$moniker]['incompleteusers'], 0, 'small compact') : '');
 		}
 		
+		# Reverse the list order
+		$list = array_reverse ($list, true);
+		
 		# Compile the HTML
 		$html .= "\n<p>You can download the data as a CSV file below:</p>";
-		$html .= application::htmlUl ($list);
 		
 		# Give a warning about Excel's terrible handling in UTF-8 in CSV files
-		$html .= "\n<br /><br /><p class=\"warning\"><strong>Warning:</strong> Microsoft Excel tends to mangle non-latin UTF-8 Unicode characters in CSV files. You are strongly recommended to open the CSV files above using <strong>OpenOffice</strong> instead, and select '<strong>Unicode (UTF-8)</strong>' as the character encoding when opening. You can then save the file in the '<strong>Microsoft Excel 97/2000/XP (.xls)</strong>' format which will preserve the Unicode encoding. Then close the CSV file and open the new .xls file.</p>";
+		$html .= "\n<p class=\"warning\"><strong>Warning:</strong> Microsoft Excel tends to mangle non-latin UTF-8 Unicode characters in CSV files. You are strongly recommended to open the CSV files above using <strong>OpenOffice</strong> instead, and select '<strong>Unicode (UTF-8)</strong>' as the character encoding when opening. You can then save the file in the '<strong>Microsoft Excel 97/2000/XP (.xls)</strong>' format which will preserve the Unicode encoding. Then close the CSV file and open the new .xls file.</p>";
+		
+		# Show the list
+		$html .= application::htmlUl ($list);
 		
 		# Show the HTML
 		echo $html;
