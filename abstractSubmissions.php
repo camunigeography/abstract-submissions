@@ -279,7 +279,7 @@ class abstractSubmissions extends frontControllerApplication
 	}
 	
 	
-	# Main page for an instance
+	# Main page for a submission
 	public function instance ($moniker)
 	{
 		# Start the HTML
@@ -312,7 +312,7 @@ class abstractSubmissions extends frontControllerApplication
 		}
 		
 		# Add the data
-		if (!$this->databaseConnection->insert ($this->settings['database'], 'submissions', $result)) {
+		if (!$this->databaseConnection->insert ($this->settings['database'], 'submissions', $result, false, $emptyToNull = false)) {
 			$html = "<p class=\"warning\">{$this->cross} An error occured when adding the submission.</p>";
 			if ($this->userIsAdministrator) {
 				application::dumpData ($this->databaseConnection->error ());
@@ -402,10 +402,10 @@ class abstractSubmissions extends frontControllerApplication
 	
 	
 	# Function to specify the fields to exclude in the main submission
-	private function excludeFieldsMainSubmission ()
+	private function excludeFieldsMainSubmission (&$optional = array () /* returned by reference */)
 	{
 		# Core exclusions
-		$exclude = array (
+		$core = array (
 			"instance__JOIN__{$this->settings['database']}__instances__reserved",
 			"user__JOIN__{$this->settings['database']}__users__reserved",
 			'timestamp',
@@ -416,31 +416,34 @@ class abstractSubmissions extends frontControllerApplication
 		
 		# Exclusions based on whether the setting has any text in the field
 		if (!$this->instance['topics']) {
-			$exclude[] = 'topic1';
-			$exclude[] = 'topic2';
+			$optional[] = 'topic1';
+			$optional[] = 'topic2';
 		}
 		if (!$this->instance['sessions']) {
-			$exclude[] = 'session1';
-			$exclude[] = 'session2';
+			$optional[] = 'session1';
+			$optional[] = 'session2';
 		}
 		if (!$this->instance['keywords']) {
-			$exclude[] = 'keyword1';
-			$exclude[] = 'keyword2';
-			$exclude[] = 'keyword3';
+			$optional[] = 'keyword1';
+			$optional[] = 'keyword2';
+			$optional[] = 'keyword3';
 		}
 		
 		# Settings-based changes
 		if ($this->instance['includeSubmittingPaperQuestion'] != 'Yes') {
-			$exclude[] = 'submittingPaper';
+			$optional[] = 'submittingPaper';
 		}
 		if ($this->instance['includeDataSection'] != 'Yes') {
-			$exclude[] = 'dataStorage';
-			$exclude[] = 'dataStorageDetails';
-			$exclude[] = 'metadata';
-			$exclude[] = 'metadataDetails';
-			$exclude[] = 'dataAvailability';
-			$exclude[] = 'dataAvailabilityDetails';
+			$optional[] = 'dataStorage';
+			$optional[] = 'dataStorageDetails';
+			$optional[] = 'metadata';
+			$optional[] = 'metadataDetails';
+			$optional[] = 'dataAvailability';
+			$optional[] = 'dataAvailabilityDetails';
 		}
+		
+		# Merge
+		$exclude = array_merge ($core, $optional);
 		
 		# Return the list
 		return $exclude;
@@ -464,7 +467,7 @@ class abstractSubmissions extends frontControllerApplication
 		));
 		
 		# Determine fields to exclude in dataBinding, based on the settings
-		$exclude = $this->excludeFieldsMainSubmission ();
+		$exclude = $this->excludeFieldsMainSubmission ($optionalFields /* returned by reference */);
 		
 		# Databind the main part of the form
 		$form->dataBinding (array (
@@ -535,6 +538,15 @@ class abstractSubmissions extends frontControllerApplication
 		# Add fixed data
 		$result["instance__JOIN__{$this->settings['database']}__instances__reserved"] = $this->instance['id'];
 		$result["user__JOIN__{$this->settings['database']}__users__reserved"] = $this->user;
+		
+		# Initialise empty fields, where they exist in the field structure
+		foreach ($optionalFields as $field) {
+			if (in_array ($field, $fields)) {
+				if (!array_key_exists ($field, $result)) {
+					$result[$field] = '';
+				}
+			}
+		}
 		
 		# Return the result
 		return $result;
