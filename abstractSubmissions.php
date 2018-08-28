@@ -467,7 +467,7 @@ class abstractSubmissions extends frontControllerApplication
 			'intelligence' => true,
 			'exclude' => $exclude,
 			'attributes' => array (
-				'title' => array ('heading' => array (3 => 'Presentation', 'p' => 'Here you need to enter the main details for your submission.</p><p>This <a href="http://en.wikipedia.org/wiki/Wikipedia:Unicode_subscripts_and_superscripts#Superscripts_and_subscripts_block" target="_blank" title="[Link opens in a new window]">subscript/superscript characters (left table)</a> can be used to paste in real subscript/superscript characters.')),
+				'title' => array ('heading' => array (3 => 'Presentation', 'p' => 'Here you need to enter the main details for your submission.</p><p>This <a href="https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts#Superscripts_and_subscripts_block" target="_blank" title="[Link opens in a new window]">subscript/superscript characters (left table)</a> can be used to paste in real subscript/superscript characters.')),
 				'presentation' => array ('type' => 'radiobuttons', ),
 				'abstract' => array ('cols' => 80, 'rows' => 15, 'maxlength' => $this->instance['abstractCharacters'], ),
 				'topic1' => array ('type' => 'select', 'values' => $this->instance['topics'], ),
