@@ -312,7 +312,14 @@ class abstractSubmissions extends frontControllerApplication
 		}
 		
 		# Add the data
-		$this->databaseConnection->insert ($this->settings['database'], 'submissions', $result);
+		if (!$this->databaseConnection->insert ($this->settings['database'], 'submissions', $result)) {
+			$html = "<p class=\"warning\">{$this->cross} An error occured when adding the submission.</p>";
+			if ($this->userIsAdministrator) {
+				application::dumpData ($this->databaseConnection->error ());
+			}
+			echo $html;
+			return false;
+		}
 		
 		# Get the ID and create a formatted key from it
 		$submissionId = $this->databaseConnection->getLatestId ();
