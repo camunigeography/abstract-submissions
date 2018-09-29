@@ -1327,7 +1327,7 @@ class abstractSubmissions extends frontControllerApplication
 	
 	
 	# Admin editing section, substantially delegated to the sinenomine editing component
-	public function editing ($attributes = array (), $deny = false)
+	public function editing ($attributes = array (), $deny = false, $sinenomineExtraSettings = array ())
 	{
 		# Define sinenomine attributes
 		$attributes = array (
