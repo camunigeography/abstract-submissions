@@ -1401,7 +1401,7 @@ class abstractSubmissions extends frontControllerApplication
 		$html .= "\n<p>You can download the data as a CSV file below:</p>";
 		
 		# Give a warning about Excel's terrible handling in UTF-8 in CSV files
-		$html .= "\n<p class=\"warning\"><strong>Warning:</strong> Microsoft Excel tends to mangle non-latin UTF-8 Unicode characters in CSV files. You are strongly recommended to open the CSV files above using <strong>OpenOffice</strong> instead, and select '<strong>Unicode (UTF-8)</strong>' as the character encoding when opening. You can then save the file in the '<strong>Microsoft Excel 97/2000/XP (.xls)</strong>' format which will preserve the Unicode encoding. Then close the CSV file and open the new .xls file.</p>";
+		$html .= "\n<p class=\"warning\"><strong>Warning:</strong> Microsoft Excel tends to mangle international characters in CSV files. You are strongly recommended to open the CSV files above using <strong>OpenOffice</strong> instead, and select '<strong>Unicode (UTF-8)</strong>' as the character encoding when opening. You can then save the file in the '<strong>Microsoft Excel 97/2000/XP (.xls)</strong>' format, which will preserve the Unicode encoding. Then close (and discard) the CSV file and open the new .xls file using Excel.</p>";
 		
 		# Show the list
 		$html .= application::htmlUl ($list);
