@@ -117,17 +117,17 @@ class abstractSubmissions extends frontControllerApplication
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
 			  `submission__JOIN__{$this->settings['database']}__submissions__reserved` int(11) NOT NULL COMMENT 'Submission ID',
 			  `gender` enum('','Female','Male','Other') COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Gender',
-			  `title` enum('','Dr','Mr','Ms','Miss','Mrs','Mx','Prof','Prof Dr','Prof Sir','Associate Professor') COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'Title',
+			  `title` enum('','Dr','Mr','Ms','Miss','Mrs','Mx','Prof','Prof Dr','Prof Sir','Associate Professor') COLLATE utf8_unicode_ci DEFAULT '' COMMENT 'Title',
 			  `forename` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Forename',
 			  `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Surname',
 			  `affiliation` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Affiliation',
-			  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Address',
-			  `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'City',
+			  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Address',
+			  `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'City',
 			  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'State/Province',
-			  `postcode` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Postal/ZIP code',
-			  `telephone` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Telephone',
+			  `postcode` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Postal/ZIP code',
+			  `telephone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Telephone',
 			  `fax` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Fax',
-			  `countryOrigin` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Country of origin',
+			  `countryOrigin` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Country of origin',
 			  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'E-mail address'
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Authors';
 			
