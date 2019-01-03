@@ -116,8 +116,8 @@ class abstractSubmissions extends frontControllerApplication
 			CREATE TABLE `authors` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
 			  `submission__JOIN__{$this->settings['database']}__submissions__reserved` int(11) NOT NULL COMMENT 'Submission ID',
-			  `gender` enum('','Female','Male') COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Gender',
-			  `title` enum('','Dr','Mr','Ms','Miss','Mrs','Prof','Prof Dr','Prof Sir','Associate Professor') COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'Title',
+			  `gender` enum('','Female','Male','Other') COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Gender',
+			  `title` enum('','Dr','Mr','Ms','Miss','Mrs','Mx','Prof','Prof Dr','Prof Sir','Associate Professor') COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'Title',
 			  `forename` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Forename',
 			  `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Surname',
 			  `affiliation` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Affiliation',
