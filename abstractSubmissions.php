@@ -344,12 +344,12 @@ class abstractSubmissions extends frontControllerApplication
 			IF( (NOW() < closingDatetime) AND (NOW() > openingDatetime), 1, '' ) AS isOpen,
 			IF( (NOW() >= closingDatetime), 1, '' ) AS hasClosed /* i.e. was open previously */
 		FROM {$this->settings['database']}.{$this->settings['table']}
-		ORDER BY closingDatetime;";
+		ORDER BY closingDatetime DESC;";
 		
 		# Get the instances or end
 		if (!$data = $this->databaseConnection->getData ($query, "{$this->settings['database']}.{$this->settings['table']}")) {return false;}
 		
-		# Reorder by URL
+		# Reindex by URL
 		$instances = array ();
 		foreach ($data as $id => $instance) {
 			$moniker = $instance['moniker'];
@@ -369,7 +369,7 @@ class abstractSubmissions extends frontControllerApplication
 			*
 			FROM {$this->settings['database']}.submissions
 			WHERE user__JOIN__{$this->settings['database']}__users__reserved = {$userId}
-			ORDER BY id;";
+			ORDER BY id DESC;";
 		
 		# Get the instances or end
 		if (!$submissions = $this->databaseConnection->getData ($query, "{$this->settings['database']}.submissions")) {return false;}
@@ -1393,9 +1393,6 @@ class abstractSubmissions extends frontControllerApplication
 		foreach ($this->instances as $moniker => $instance) {
 			$list[$moniker] = "<a href=\"{$this->baseUrl}/{$moniker}/{$moniker}.csv\"><strong>{$moniker}.csv</strong></a> <strong>(" . htmlspecialchars ($instance['title']) . ")</strong> - {$submissions[$moniker]['complete']} complete submissions" . ($submissions[$moniker]['incomplete'] ? "; excludes {$submissions[$moniker]['incomplete']} incomplete " . ($submissions[$moniker]['incomplete'] == 1 ? 'submission' : 'submissions') . " from: <br />" . application::htmlUl ($submissions[$moniker]['incompleteusers'], 0, 'small compact') : '');
 		}
-		
-		# Reverse the list order
-		$list = array_reverse ($list, true);
 		
 		# Compile the HTML
 		$html .= "\n<p>You can download the data as a CSV file below:</p>";
