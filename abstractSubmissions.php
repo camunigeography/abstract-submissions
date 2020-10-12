@@ -166,6 +166,7 @@ class abstractSubmissions extends frontControllerApplication
 			  `presentation` enum('Poster','Oral','Either') COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Presentation preferences',
 			  `session1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Session',
 			  `abstract` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The abstract',
+			  `student` ENUM('','No','Yes') NOT NULL COMMENT 'Is this a student presentation?',
 			  `submittingPaper` enum('','Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Will you be submitting a paper for publication in the Annals?',
 			  `topic1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Topic (preference 1)',
 			  `topic2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Topic (preference 2)',
