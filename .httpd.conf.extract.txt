@@ -9,7 +9,7 @@
 
 <Macro MacroAbstractSubmissions $applicationBaseUrl $includePath $ckEditorPath>
 	
-	<Location $applicationBaseUrl>
+	<Location $applicationBaseUrl/>
 		php_value include_path "$includePath"
 	</Location>
 	
