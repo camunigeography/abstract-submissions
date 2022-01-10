@@ -163,7 +163,7 @@ class abstractSubmissions extends frontControllerApplication
 			  `instance__JOIN__{$this->settings['database']}__instances__reserved` int(11) NOT NULL COMMENT 'Instance no.',
 			  `user__JOIN__{$this->settings['database']}__users__reserved` int(11) NOT NULL COMMENT 'User no.',
 			  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Title of presentation',
-			  `presentation` enum('Poster','Oral','Either') COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Presentation preferences',
+			  `presentation` enum('Poster','Oral','Either','Other (give details in Abstract)') COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Presentation preferences',
 			  `session1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Session',
 			  `abstract` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The abstract',
 			  `student` ENUM('','No','Yes') NOT NULL COMMENT 'Is this a student presentation?',
