@@ -19,6 +19,7 @@ class abstractSubmissions extends frontControllerApplication
 			'feedbackRecipient'								=> NULL,
 			'authentication'								=> true,	// All pages require login
 			'internalAuth'									=> true,
+			'useCamUniLookup'								=> true,
 			'administrators'								=> 'administrators',
 			'showTimezone'									=> 'GMT',
 			'internalAuthPasswordRequiresLettersAndNumbers'	=> false,	// Not really necessary for this kind of application
