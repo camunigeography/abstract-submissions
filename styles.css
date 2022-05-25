@@ -1,0 +1,19 @@
+/* Abstract submission */
+#abstractsubmissions h3 {margin-top: 2.5em; margin-bottom: 1.1em;}
+#abstractsubmissions ul.boxylist {margin-bottom: 1.4em;}
+/* #!# Not working */
+#abstractsubmissions ul.ui-autocomplete {list-style: none;}
+#abstractsubmissions ul.tabs.submission li.selected a {background-color: #ddd; color: black; font-weight: bold;}
+#abstractsubmissions ul.tabs.submission {margin-bottom: 0;}
+#abstractsubmissions ul.tabs a.confirm {margin-left: 20px;}
+#abstractsubmissions p.tools {margin-top: 0; text-align: right; background-color: #f7f7f7; padding: 5px 10px; color: #ccc; margin-bottom: 2em;}
+#abstractsubmissions p.tools a {margin: 0 7px 0 7px;}
+#abstractsubmissions .ultimateform table tr.dataStorage td, #abstractsubmissions .ultimateform table tr.metadata td, #abstractsubmissions .ultimateform table tr.dataAvailability td {border-bottom: 0; padding-bottom: 0;}
+#abstractsubmissions .ultimateform table tr.dataStorageDetails td, #abstractsubmissions .ultimateform table tr.metadataDetails td, #abstractsubmissions .ultimateform table tr.dataAvailabilityDetails td {border-top: 0; padding-top: /* Needed for old IE */ 2px; padding-left: 5em; padding-bottom: 2em;}
+#abstractsubmissions .ultimateform table tr.dataStorageDetails td.title, #abstractsubmissions .ultimateform table tr.metadataDetails td.title, #abstractsubmissions .ultimateform table tr.dataAvailabilityDetails td.title {color: #777;}
+#abstractsubmissions .ultimateform table tr.heading td {border-left: 0; border-right: 0;}
+#abstractsubmissions .ultimateform table tr.heading td h3 {margin: 1.2em 0 0.2em;}
+#abstractsubmissions h4 span {margin-left: 20px; font-weight: normal; font-size: 0.9em;}
+#abstractsubmissions h4 span, #abstractsubmissions h4 span a {color: #888;}
+#abstractsubmissions ul.tabs li {white-space: nowrap;}
+
