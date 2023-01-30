@@ -25,6 +25,7 @@ class abstractSubmissions extends frontControllerApplication
 			'internalAuthPasswordRequiresLettersAndNumbers'	=> false,	// Not really necessary for this kind of application
 			'dataDisableAuth'								=> true,
 			'useEditing'									=> true,
+			'tabUlClass'									=> 'tabsflat',
 		);
 		
 		# Return the defaults
