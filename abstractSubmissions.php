@@ -110,53 +110,53 @@ class abstractSubmissions extends frontControllerApplication
 	{
 		return "
 			CREATE TABLE `administrators` (
-			  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Username' PRIMARY KEY,
-			  `active` enum('','Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Yes' COMMENT 'Currently active?',
-			  `privilege` enum('Administrator','Restricted administrator') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Administrator' COMMENT 'Administrator level'
+			  `username` varchar(191) NOT NULL COMMENT 'Username' PRIMARY KEY,
+			  `active` enum('','Yes','No') NOT NULL DEFAULT 'Yes' COMMENT 'Currently active?',
+			  `privilege` enum('Administrator','Restricted administrator') NOT NULL DEFAULT 'Administrator' COMMENT 'Administrator level'
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='System administrators';
 			
 			CREATE TABLE `authors` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
 			  `submission__JOIN__{$this->settings['database']}__submissions__reserved` int(11) NOT NULL COMMENT 'Submission ID',
-			  `gender` enum('','Female','Male','Non-binary','Other','Prefer not to say') COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Gender',
-			  `title` enum('','Dr','Mr','Ms','Miss','Mrs','Mx','Prof','Prof Dr','Prof Sir','Associate Professor') COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'Title',
-			  `forename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Forename',
-			  `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Surname',
-			  `affiliation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Affiliation',
-			  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Address',
-			  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'City',
-			  `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'State/Province',
-			  `postcode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Postal/ZIP code',
-			  `telephone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Telephone',
-			  `fax` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Fax',
-			  `countryOrigin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Country of origin',
-			  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'E-mail address'
+			  `gender` enum('','Female','Male','Non-binary','Other','Prefer not to say') NULL DEFAULT NULL COMMENT 'Gender',
+			  `title` enum('','Dr','Mr','Ms','Miss','Mrs','Mx','Prof','Prof Dr','Prof Sir','Associate Professor') DEFAULT '' COMMENT 'Title',
+			  `forename` varchar(255) NOT NULL COMMENT 'Forename',
+			  `surname` varchar(255) NOT NULL COMMENT 'Surname',
+			  `affiliation` varchar(255) NOT NULL COMMENT 'Affiliation',
+			  `address` varchar(255) DEFAULT NULL COMMENT 'Address',
+			  `city` varchar(255) DEFAULT NULL COMMENT 'City',
+			  `state` varchar(255) DEFAULT NULL COMMENT 'State/Province',
+			  `postcode` varchar(255) DEFAULT NULL COMMENT 'Postal/ZIP code',
+			  `telephone` varchar(255) DEFAULT NULL COMMENT 'Telephone',
+			  `fax` varchar(255) DEFAULT NULL COMMENT 'Fax',
+			  `countryOrigin` varchar(255) DEFAULT NULL COMMENT 'Country of origin',
+			  `email` varchar(255) NOT NULL COMMENT 'E-mail address'
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Authors';
 			
 			CREATE TABLE `countries` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
-			  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country name',
-			  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Label',
+			  `value` varchar(191) NOT NULL COMMENT 'Country name',
+			  `label` varchar(255) NOT NULL COMMENT 'Label',
 			  KEY `country` (`value`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Country names';
 			
 			CREATE TABLE `instances` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
-			  `moniker` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Moniker (a-z, 0-9 and - only), e.g. some-conference',
-			  `isVisible` enum('','Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Whether this instance is visible on the listing page',
-			  `organisationEmail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Organisation e-mail address for correspondence',
-			  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Title',
+			  `moniker` varchar(191) NOT NULL COMMENT 'Moniker (a-z, 0-9 and - only), e.g. some-conference',
+			  `isVisible` enum('','Yes','No') NOT NULL COMMENT 'Whether this instance is visible on the listing page',
+			  `organisationEmail` varchar(255) NOT NULL COMMENT 'Organisation e-mail address for correspondence',
+			  `title` varchar(255) NOT NULL COMMENT 'Title',
 			  `openingDatetime` datetime NOT NULL COMMENT 'Opening date and time for submissions',
 			  `closingDatetime` datetime NOT NULL COMMENT 'Closing date and time for submissions',
-			  `message` text COLLATE utf8mb4_unicode_ci COMMENT 'Special message that will appear on the create submission form page',
-			  `topics` text COLLATE utf8mb4_unicode_ci COMMENT 'Topics (if relevant) (one per line)',
-			  `includeSubmittingPaperQuestion` enum('','Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Whether to include a question on submitting a paper for publication',
-			  `includeDataSection` enum('','Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Whether to include a data details section',
+			  `message` text COMMENT 'Special message that will appear on the create submission form page',
+			  `topics` text COMMENT 'Topics (if relevant) (one per line)',
+			  `includeSubmittingPaperQuestion` enum('','Yes','No') NOT NULL DEFAULT '' COMMENT 'Whether to include a question on submitting a paper for publication',
+			  `includeDataSection` enum('','Yes','No') NOT NULL DEFAULT '' COMMENT 'Whether to include a data details section',
 			  `abstractCharacters` int(5) NOT NULL COMMENT 'Max number of characters for the abstract text',
-			  `sessions` text COLLATE utf8mb4_unicode_ci COMMENT 'Sessions (one per line)',
-			  `keywords` text COLLATE utf8mb4_unicode_ci COMMENT 'Keywords (one per line)',
-			  `listSignup` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'E-mail address for list signup (or blank if none)',
-			  `dataProtectionHtml` text COLLATE utf8mb4_unicode_ci COMMENT 'Data protection statement',
+			  `sessions` text COMMENT 'Sessions (one per line)',
+			  `keywords` text COMMENT 'Keywords (one per line)',
+			  `listSignup` varchar(255) DEFAULT NULL COMMENT 'E-mail address for list signup (or blank if none)',
+			  `dataProtectionHtml` text COMMENT 'Data protection statement',
 			  UNIQUE KEY `moniker` (`moniker`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Settings for each instance';
 			
@@ -164,17 +164,17 @@ class abstractSubmissions extends frontControllerApplication
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Submission number' PRIMARY KEY,
 			  `instance__JOIN__{$this->settings['database']}__instances__reserved` int(11) NOT NULL COMMENT 'Instance no.',
 			  `user__JOIN__{$this->settings['database']}__users__reserved` int(11) NOT NULL COMMENT 'User no.',
-			  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Title of presentation',
-			  `presentation` enum('Poster','Oral','Either','Other (give details in Abstract)') COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Presentation preferences',
-			  `session1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Session',
-			  `abstract` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The abstract',
+			  `title` varchar(255) NOT NULL COMMENT 'Title of presentation',
+			  `presentation` enum('Poster','Oral','Either','Other (give details in Abstract)') NOT NULL COMMENT 'Presentation preferences',
+			  `session1` varchar(255) DEFAULT NULL COMMENT 'Session',
+			  `abstract` text NOT NULL COMMENT 'The abstract',
 			  `student` ENUM('','No','Yes') NOT NULL COMMENT 'Is this a student presentation?',
-			  `submittingPaper` enum('','Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Will you be submitting a paper for publication in the Annals?',
-			  `topic1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Topic (preference 1)',
-			  `topic2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Topic (preference 2)',
-			  `keyword1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Keyword (preference 1)',
-			  `keyword2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Keyword (preference 2)',
-			  `keyword3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Keyword (preference 3)',
+			  `submittingPaper` enum('','Yes','No') NOT NULL DEFAULT '' COMMENT 'Will you be submitting a paper for publication in the Annals?',
+			  `topic1` varchar(255) NOT NULL COMMENT 'Topic (preference 1)',
+			  `topic2` varchar(255) NOT NULL COMMENT 'Topic (preference 2)',
+			  `keyword1` varchar(255) NOT NULL COMMENT 'Keyword (preference 1)',
+			  `keyword2` varchar(255) DEFAULT NULL COMMENT 'Keyword (preference 2)',
+			  `keyword3` varchar(255) DEFAULT NULL COMMENT 'Keyword (preference 3)',
 			  `presentingAuthor` int(11) DEFAULT NULL COMMENT 'Presenting author',
 			  `correspondingAuthor` int(11) DEFAULT NULL COMMENT 'Corresponding author',
 			  `isComplete` tinyint(1) DEFAULT NULL COMMENT 'Whether the submission is complete',
@@ -183,9 +183,9 @@ class abstractSubmissions extends frontControllerApplication
 			
 			CREATE TABLE `users` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
-			  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Your e-mail address',
-			  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Password',
-			  `validationToken` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Token for validation or password reset',
+			  `email` varchar(191) NOT NULL COMMENT 'Your e-mail address',
+			  `password` varchar(255) NOT NULL COMMENT 'Password',
+			  `validationToken` varchar(255) DEFAULT NULL COMMENT 'Token for validation or password reset',
 			  `lastLoggedInAt` datetime DEFAULT NULL COMMENT 'Last logged in time',
 			  `validatedAt` datetime DEFAULT NULL COMMENT 'Time when validated',
 			  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp',
