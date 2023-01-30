@@ -1332,6 +1332,11 @@ class abstractSubmissions extends frontControllerApplication
 	# Admin editing section, substantially delegated to the sinenomine editing component
 	public function editing ($attributes = array (), $deny = false, $sinenomineExtraSettings = array ())
 	{
+		# Define sinenomine settings
+		$sinenomineExtraSettings = array (
+			'truncateValues' => 100,
+		);
+		
 		# Define sinenomine attributes
 		$attributes = array (
 			array ($this->settings['database'], 'instances', 'moniker', array ('regexp' => '^[-a-z0-9]+$')),
@@ -1347,7 +1352,7 @@ class abstractSubmissions extends frontControllerApplication
 		);
 		
 		# Hand off to the default editor, which will echo the HTML
-		parent::editing ($attributes, $deny);
+		parent::editing ($attributes, $deny, $sinenomineExtraSettings);
 	}
 	
 	
