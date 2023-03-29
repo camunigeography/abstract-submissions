@@ -1045,7 +1045,11 @@ class abstractSubmissions extends frontControllerApplication
 	private function completedSubmissionAsText ($submission)
 	{
 		# Add an underline after each <h4></h4>
-		$submission = preg_replace_callback ("~<h4>([^<]+)</h4>~", create_function ('$matches', 'return "\n\n\n" . $matches[0] . "\n" . str_repeat ("-", min (75, strlen ($matches[0]) - strlen ("<h4>" . "</h4>")));'), $submission);
+		$submission = preg_replace_callback ("~<h4>([^<]+)</h4>~",
+			function ($matches) {
+				return "\n\n\n" . $matches[0] . "\n" . str_repeat ('-', min (75, strlen ($matches[0]) - strlen ("<h4>" . "</h4>")));
+			}
+		, $submission);
 		
 		# Remove all HTML
 		$submission = strip_tags ($submission);
