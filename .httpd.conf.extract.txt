@@ -41,7 +41,7 @@
 		AddType application/x-httpd-php .html .php
 		php_admin_value auto_prepend_file none
 		php_admin_value auto_append_file none
-		Allow from all
+		Require all granted
 	</Location>
 	
 	<Location $applicationBaseUrl/>
