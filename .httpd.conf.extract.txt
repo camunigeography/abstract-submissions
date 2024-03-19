@@ -4,14 +4,10 @@
 #   
 #   # Abstract submission system
 #   Include /path/to/abstract-submissions/.httpd.conf.extract.txt
-#   Use MacroAbstractSubmissions "/abstracts" "/path/to/abstract-submissions/:/path/to/php/libraries/:/path/to/ckeditor/" "/path/to/ckeditor/"
+#   Use MacroAbstractSubmissions "/abstracts" "/path/to/ckeditor/"
 
 
-<Macro MacroAbstractSubmissions $applicationBaseUrl $includePath $ckEditorPath>
-	
-	<Location $applicationBaseUrl/>
-		php_value include_path "$includePath"
-	</Location>
+<Macro MacroAbstractSubmissions $applicationBaseUrl $ckEditorPath>
 	
 	Use MacroFrontControllerApplication "$applicationBaseUrl/" "Abstracts"
 	

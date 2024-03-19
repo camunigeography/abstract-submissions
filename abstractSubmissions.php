@@ -1,7 +1,6 @@
 <?php
 
 # Class to create an abstract submission system
-require_once ('frontControllerApplication.php');
 class abstractSubmissions extends frontControllerApplication
 {
 	# Assign defaults additional to the general application defaults
@@ -10,7 +9,6 @@ class abstractSubmissions extends frontControllerApplication
 		# Specify available arguments as defaults or as NULL (to represent a required argument)
 		$defaults = array (
 			'div'											=> 'abstractsubmissions',
-			'hostname'										=> NULL,
 			'database'										=> 'abstracts',
 			'table'											=> 'instances',
 			'username'										=> 'abstracts',
@@ -778,7 +776,6 @@ class abstractSubmissions extends frontControllerApplication
 		$html  = '';
 		
 		# Load and create a form
-		require_once ('ultimateForm.php');
 		$form = new form (array (
 			'databaseConnection' => $this->databaseConnection,
 			'formCompleteText' => false,
@@ -1257,7 +1254,6 @@ class abstractSubmissions extends frontControllerApplication
 		if (!$author = $this->getAuthor ($html)) {return false;}
 		
 		# Load and create a form
-		require_once ('ultimateForm.php');
 		$form = new form (array (
 			'databaseConnection' => $this->databaseConnection,
 			'formCompleteText' => false,
@@ -1520,7 +1516,6 @@ class abstractSubmissions extends frontControllerApplication
 		}
 		
 		# Serve as CSV
-		require_once ('csv.php');
 		csv::serve ($data, $moniker);
 	}
 }
