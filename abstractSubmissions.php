@@ -111,7 +111,7 @@ class abstractSubmissions extends frontControllerApplication
 			  `username` varchar(191) NOT NULL COMMENT 'Username' PRIMARY KEY,
 			  `active` enum('','Yes','No') NOT NULL DEFAULT 'Yes' COMMENT 'Currently active?',
 			  `privilege` enum('Administrator','Restricted administrator') NOT NULL DEFAULT 'Administrator' COMMENT 'Administrator level'
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='System administrators';
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='System administrators';
 			
 			CREATE TABLE `authors` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
@@ -129,14 +129,14 @@ class abstractSubmissions extends frontControllerApplication
 			  `fax` varchar(255) DEFAULT NULL COMMENT 'Fax',
 			  `countryOrigin` varchar(255) DEFAULT NULL COMMENT 'Country of origin',
 			  `email` varchar(255) NOT NULL COMMENT 'E-mail address'
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Authors';
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Authors';
 			
 			CREATE TABLE `countries` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
 			  `value` varchar(191) NOT NULL COMMENT 'Country name',
 			  `label` varchar(255) NOT NULL COMMENT 'Label',
 			  KEY `country` (`value`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Country names';
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Country names';
 			
 			CREATE TABLE `instances` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
@@ -156,7 +156,7 @@ class abstractSubmissions extends frontControllerApplication
 			  `listSignup` varchar(255) DEFAULT NULL COMMENT 'E-mail address for list signup (or blank if none)',
 			  `dataProtectionHtml` text COMMENT 'Data protection statement',
 			  UNIQUE KEY `moniker` (`moniker`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Settings for each instance';
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Settings for each instance';
 			
 			CREATE TABLE `submissions` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Submission number' PRIMARY KEY,
@@ -177,7 +177,7 @@ class abstractSubmissions extends frontControllerApplication
 			  `correspondingAuthor` int(11) DEFAULT NULL COMMENT 'Corresponding author',
 			  `isComplete` tinyint(1) DEFAULT NULL COMMENT 'Whether the submission is complete',
 			  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date/time when submission started'
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Abstract submissions';
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Abstract submissions';
 			
 			CREATE TABLE `users` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Automatic key' PRIMARY KEY,
@@ -188,7 +188,7 @@ class abstractSubmissions extends frontControllerApplication
 			  `validatedAt` datetime DEFAULT NULL COMMENT 'Time when validated',
 			  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp',
 			  UNIQUE KEY `email` (`email`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Users';
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Users';
 		";
 	}
 	
