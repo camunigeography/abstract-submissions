@@ -24,6 +24,7 @@ class abstractSubmissions extends frontControllerApplication
 			'dataDisableAuth'								=> true,
 			'useEditing'									=> true,
 			'tabUlClass'									=> 'tabsflat',
+			'loginMessageHtml'								=> false,
 		);
 		
 		# Return the defaults
